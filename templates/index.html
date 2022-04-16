@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS Map Exanple</title>
+</head>
+<body>
+
+<div id="map" style="width: 100%; height: 800px; margin-left: auto; margin-right: auto"></div>
+
+<script src="../static/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANB7i4BI8rnY2vCl3W7QdEU9xxmGIMIgA"></script>
+<script src="../static/jquery.googlemap.js"></script>
+
+<script type="text/javascript">
+    $(function() {
+        let map = $("#map")
+            map.googleMap({
+            zoom: 15, // Initial zoom level (optional)
+            coords: [46.640232, 32.561961],
+            type: "SATELLITE"
+        });
+
+        map.addMarker({
+            coords: [46.638174, 32.560896], // GPS coords
+            title: 'Два БТРа, Один Краз',
+            text:  [46.638174, 32.560896]
+        })
+        map.addMarker({
+            coords: [46.638070, 32.563879], // GPS coords
+            title: 'Один Патрульный',
+            text:  [46.638070, 32.563879]
+        })
+
+        map.addMarker({
+            coords: [46.638129, 32.560506], // GPS coords
+            title: 'Два Патрульных',
+            text:  [46.638070, 32.563879]
+        })
+
+        map.addMarker({
+            coords: [46.637900, 32.562779], // GPS coords
+            title: 'Два Краза',
+            text:  [46.637900, 32.562779]
+        })
+        map.addMarker({
+            coords: [46.638652, 32.460717], // GPS coords
+            title: 'Блок Пост',
+            text:  [46.638652, 32.460717]
+        })
+
+    })
+</script>
+
+</body>
+</html>
