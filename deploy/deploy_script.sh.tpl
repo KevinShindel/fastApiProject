@@ -9,12 +9,12 @@ mkdir ${project_name}
 
 echo "server {
         listen 80;
-        server_name ${project_name};
+        server_name localhost;
         location /static {
           alias /opt/${project_name}/static;
         }
         location / {
-                proxy_set_header Host $host;
+                proxy_set_header Host localhost;
                 proxy_pass http://unix:/tmp/${project_name}.socket;
         }
 }" > ${project_name}.config
@@ -29,4 +29,4 @@ cd ${project_name}
 pip install -r requirements.txt
 
 # launch server
-python -m uvicorn main:app --udx=/tmp/${project_name}.socket # run on socket
+python -m uvicorn main:app --uds=/tmp/${project_name}.socket # run on socket
