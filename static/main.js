@@ -55,8 +55,13 @@ $(init_map = function() {
 
     map.addMarker({
         coords: [46.655912, 32.605082], // GPS coords
-        title: 'Блок Пост',
+        title: 'Блок Пост (1 БТР и 1 Тигр)',
         text:  [46.655912, 32.605082]
+    })
+    map.addMarker({
+        coords: [46.663306, 32.596297], // GPS coords
+        title: 'Блок Пост (1 БТР и 1 Тигр)',
+        text:  [46.663306, 32.596297]
     })
 
     map.addMarker({
