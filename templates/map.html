@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="navigation-block">
+    <label for="map_type">Map Type</label>
+    <select id="map_type">
+        <option value="ROADMAP" selected>ROADMAP</option>
+        <option value="SATELLITE">SATELLITE</option>
+        <option value="HYBRID">HYBRID</option>
+        <option value="TERRAIN">TERRAIN</option>
+    </select>
+
+    <button type="button" onclick="showForm()">Add point</button>
+
+    <div id="pop-up" hidden>
+        <form id="form" method="post">
+            <input type="number" name="id" id="id" value="3" hidden aria-label=""/>
+            <div>
+                <label for="coords">Coordinates</label>
+                <input type="text" name="coords" id="coords" required/>
+            </div>
+            <div>
+                <label for="text">Description</label>
+                <input type="text" name="text" id="text" required/>
+            </div>
+            <div>
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" required/>
+            </div>
+            <div>
+                <button type="submit">Add</button>
+                <button type="reset">Clear</button>
+                <button type="button">Close</button>
+            </div>
+    </form>
+</div>
+</div>
+
+<div id="map"></div>
+<div class="wrapper" hidden></div>
+{% endblock %}

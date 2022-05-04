@@ -36,7 +36,7 @@ resource "aws_security_group" "this" {
   name = "Military Server"
 
   dynamic "ingress" {
-    for_each = ["80", "443", "22"]
+    for_each = ["80", "443", "22", "8080"]
     content {
       to_port = ingress.value
       from_port = ingress.value

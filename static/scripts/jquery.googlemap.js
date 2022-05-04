@@ -27,7 +27,7 @@ $(function() {
 
 		this.each(function() {
 
-			var map = new google.maps.Map(this, {
+			let map = new google.maps.Map(this, {
 				zoom: params.zoom,
 				center: new google.maps.LatLng(params.coords[0], params.coords[1]),
 				mapTypeId: params.type,
@@ -41,7 +41,7 @@ $(function() {
 			$(this).data('googleMap', map);
 			$(this).data('googleLang', params.langage);
 			$(this).data('googleDebug', params.debug);
-			$(this).data('googleMarker', new Array());
+			$(this).data('googleMarker', []);
 			$(this).data('googleBound', new google.maps.LatLngBounds());
 		});
 
@@ -80,7 +80,7 @@ $(function() {
 
 			if(params.address && typeof params.address == "string") {
 
-				var geocodeAsync = function($that) {
+				let geocodeAsync = function($that) {
 
 					var geocoder = new google.maps.Geocoder();
 
@@ -175,9 +175,9 @@ $(function() {
 				}($this);
 			} else {
 				$this.data('googleBound').extend(new google.maps.LatLng(params.coords[0], params.coords[1]));
-
+					let marker
         			if(params.icon) {
-					var marker = new google.maps.Marker({
+					marker = new google.maps.Marker({
 						map: $this.data('googleMap'),
 						position: new google.maps.LatLng(params.coords[0], params.coords[1]),
 						title: params.title,
@@ -185,7 +185,7 @@ $(function() {
 						draggable: params.draggable
 					});
 				} else {
-					var marker = new google.maps.Marker({
+					marker = new google.maps.Marker({
 						map: $this.data('googleMap'),
 						position: new google.maps.LatLng(params.coords[0], params.coords[1]),
 						title: params.title,
@@ -193,13 +193,13 @@ $(function() {
 					});
 				}
 
-        			if(params.title != "" && params.text != "" && !params.url) {
+        			if(params.title !== "" && params.text !== "" && !params.url) {
           				var infowindow = new google.maps.InfoWindow({
 						content: "<h1>"+params.title+"</h1>"+params.text
 					});
 
 					var map = $this.data('googleMap');
-                    previous_infowindow = null;
+                    let previous_infowindow = null;
 	        			google.maps.event.addListener(marker, 'click', function() {
                             if(previous_infowindow!==null)
                                 previous_infowindow.close(map, marker);
@@ -212,11 +212,11 @@ $(function() {
         				});
 				}
 
-				if(params.draggable) {
+				if (params.draggable) {
 					google.maps.event.addListener(marker, 'dragend', function() {
-						var location = marker.getPosition();
+						let location = marker.getPosition();
 
-						var coords = {};
+						let coords = {};
 
 						coords.lat = location.lat();
 						coords.lon = location.lng();
@@ -231,7 +231,7 @@ $(function() {
         				$this.data('googleMarker')[params.id] = marker;
         			}
 
-				if($this.data('googleMarker').length == 1) {
+				if($this.data('googleMarker').length === 1) {
 					$this.data('googleMap').setCenter(new google.maps.LatLng(params.coords[0], params.coords[1]));
 					$this.data('googleMap').setZoom($this.data('googleMap').getZoom());
 				} else {
@@ -250,7 +250,7 @@ $(function() {
 
 	$.fn.removeMarker = function(id) {
 		this.each(function() {
-			var $this = $(this);
+			let $this = $(this);
 
     			if(!$this.data('googleMap')) {
     				if($this.data('googleDebug'))
@@ -259,7 +259,7 @@ $(function() {
       				return false;
     			}
 
-    			var $markers = $this.data('googleMarker');
+    			let $markers = $this.data('googleMarker');
 
     			if(typeof $markers[id] != 'undefined') {
     				$markers[id].setMap(null);
@@ -286,11 +286,11 @@ $(function() {
 			langage : 'english'
 		}, params);
 
-		var direction = new google.maps.DirectionsService({
+		let direction = new google.maps.DirectionsService({
 			region: "fr"
 		});
 
-		var way = new google.maps.DirectionsRenderer({
+		let way = new google.maps.DirectionsRenderer({
 			draggable: true,
 			map: $(this).data('googleMap'),
 			panel: document.getElementById(params.route),
@@ -299,10 +299,10 @@ $(function() {
 		
 		document.getElementById.innerHTML = "";
 
-		var waypoints = [];
+		let waypoints = [];
 
-    		for(var i in params.step) {
-    			var step;
+    		for(let i in params.step) {
+    			let step;
       			if(typeof params.step[i] == "object") {
         			step = new google.maps.LatLng(params.step[i][0], params.step[i][1]);
       			} else {
@@ -358,7 +358,7 @@ $(function() {
 			};
 
 			direction.route(request, function(response, status) {
-				if (status == google.maps.DirectionsStatus.OK) {
+				if (status === google.maps.DirectionsStatus.OK) {
 					way.setDirections(response);
 				} else {
 					if($(this).data('googleDebug'))

@@ -19,8 +19,12 @@ echo "server {
         }
 }" > ${project_name}.config
 
+sudo rm /etc/nginx/sites-available/default
+sudo rm /etc/nginx/sites-enabled/default
+
 sudo mv ${project_name}.config /etc/nginx/sites-available/
 sudo ln -s /etc/nginx/sites-available/${project_name}.config /etc/nginx/sites-enabled/${project_name}.config
+sudo service nginx reload
 
 sudo git clone https://${gh_token}@github.com/KevinShindel/fastApiProject ${project_name}
 sudo virtualenv -p python venv
